@@ -1,31 +1,29 @@
 
 //**Random Password**
 
-let pass = document.getElementById("click")
+let password = document.getElementById("text")
 let btn = document.querySelector(".btn")
 
-class Passwords {
-  
+class GeneratePassword {
+
   constructor() {
-    console.log(`Generate Random Password:`)
+    this.character = `abcdefghijklmnopqrstuvwxyz`;
+    this.symbol = `!@#$%^&*()"":?/><|{}\/~`;
+    this.passLength = 3;
   }
-  
   password() {
-    let character = `ABCDEFGHIJKLMNOPQRSTUVXWVZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+"{}\|`
-    let len = 8
-    let randomChar = ""
-    for (let index = 0; index < len; index++) {
-      let rnum = Math.floor(Math.random() * character.length)
-      randomChar += character.substring(rnum, rnum + 1);
-
-      // console.log(randomChar)
+    let randomPass = "";
+    for (let index = 0; index < this.passLength; index++) {
+      let randomNumber = Math.floor(Math.random() * this.character.length)
+      randomPass += this.character.slice(randomNumber, randomNumber - 1)
     }
-
-    btn.addEventListener("click", (() => {
-      pass.innerHTML = `${randomChar}`
-  console.log(randomChar)
-    }))
+    console.log(randomPass)
+    return randomPass;
   }
 }
-let getPass = new Passwords()
-getPass.password()
+let generatePassword = new GeneratePassword();
+
+btn.addEventListener("click", (e) => {
+  e.preventDefault()
+  password.innerHTML = `${generatePassword.password()}`
+})
